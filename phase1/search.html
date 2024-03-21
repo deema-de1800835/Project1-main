@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/search.css">
+  
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="username">Welcome, User123</div>
+            <div class="search-container">
+                <label for="searchInput">Search available items:</label>
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button onclick="searchItems()">Search</button>
+            </div>
+        </div>
+        <ul id="itemList" class="item-list">
+        
+        </ul>
+    </div>
+
+    <script>
+        
+        var itemsData = [
+            { id: 1, name: "Item 1", description: "Description of Item 1" },
+            { id: 2, name: "Item 2", description: "Description of Item 2" },
+            { id: 3, name: "Item 3", description: "Description of Item 3" }
+        ]
+        function searchItems() {
+            var searchInput = document.getElementById("searchInput").value.toLowerCase();
+            var filteredItems = itemsData.filter(function(item) {
+                return item.name.toLowerCase().includes(searchInput) || item.description.toLowerCase().includes(searchInput);
+            });
+            displayItems(filteredItems);
+        }
+
+        
+        function displayItems(items) {
+            var itemList = document.getElementById("itemList");
+            itemList.innerHTML = ""; 
+
+            items.forEach(function(item) {
+                var li = document.createElement("li");
+                li.className = "item";
+                li.textContent = "Name: " + item.name + ", Description: " + item.description;
+                itemList.appendChild(li);
+            });
+        }
+
+        displayItems(itemsData);
+    </script>
+</body>
+</html>
